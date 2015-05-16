@@ -16,7 +16,9 @@ ros::Publisher odom_pub;
 
 void poseCallback(const geometry_msgs::PoseStamped::Ptr& msg){
     static tf::TransformBroadcaster br;
+    static tf::TransformBroadcaster br2;
     tf::Transform transform;
+    tf::Transform transform2;
     transform.setOrigin( tf::Vector3(msg->pose.position.x, msg->pose.position.y, msg->pose.position.z) );
 
     x = msg->pose.position.x;
@@ -78,7 +80,12 @@ void poseCallback(const geometry_msgs::PoseStamped::Ptr& msg){
     //publish the message
     odom_pub.publish(odom);
 
-    last_time = current_time;
+//   tf::Quaternion q2;
+//   q2.setEuler(0,0,0);
+//   transform2.setOrigin(tf::Vector3(0, 0, 0));
+//   transform2.setRotation(q2);
+
+//   br2.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "/camera1", "/kinect2_rgb_optical_frame"));
 
 }
 
